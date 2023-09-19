@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "@antfu"
+  ],
+  "rules": {
+    "unused-imports/no-unused-imports": "off",
+    "antfu/top-level-function": "off"
+  }
+}

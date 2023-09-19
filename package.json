@@ -1,0 +1,19 @@
+{
+  "name": "example-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anov/3d": "0.0.4-alpha.1",
+    "parcel": "^2.9.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.5",
+    "eslint": "^8.23.0"
+  }
+}
