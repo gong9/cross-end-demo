@@ -1,1 +1,1 @@
-import './src/index'
+import './src/view.tsx'

@@ -2,7 +2,7 @@ import { AmbientLight, Color, ModelLoader, SceneControl, Vector3, use } from '@a
 import type SchemaType from './type'
 import type { NodeType, PrivatePropType } from './type'
 
-const { useScene } = use
+// const { useScene } = use
 const modelLoader = new ModelLoader()
 
 const vec3 = (data: number[]) => {
@@ -10,11 +10,17 @@ const vec3 = (data: number[]) => {
   return new Vector3(x, y, z)
 }
 
-const initScene = (configs: PrivatePropType) => {
+const initScene = (configs: PrivatePropType, target: HTMLDivElement) => {
   const scene = new SceneControl({
     orbitControls: true,
+    rendererOps: {
+      size: {
+        width: target.clientWidth,
+        height: target.clientHeight,
+      },
+    },
   })
-  scene.render(document.querySelector('#app') as HTMLElement)
+  scene.render(target)
   scene.startFrameAnimate()
 
   const { backgroundColor } = configs
@@ -63,7 +69,13 @@ const putModel = (curNode: NodeType, scene: SceneControl) => {
 
   if (modelStyle === 'glb' || modelStyle === 'gltf') {
     modelLoader.loadGLTF(src).then((gltf) => {
-      scene.add(gltf.scene)
+      const modelScene = gltf.scene
+      const { attributes } = curNode
+
+      modelScene.position.copy(vec3((attributes?.postion || [0, 0, 0])))
+      modelScene.scale.copy(vec3((attributes?.scale || [1, 1, 1])))
+
+      scene.add(modelScene)
     })
   }
 }
@@ -97,12 +109,12 @@ const addNodes = (currentSceneNodes: string[], nodes: NodeType[], scene: SceneCo
   }
 }
 
-const parse = (schema: SchemaType) => {
+const parse = (schema: SchemaType, target: HTMLDivElement) => {
   const currentScene = schema.scenes[schema.scene]
 
   if (currentScene) {
     const sceneConfigs = currentScene.private || {}
-    const sceneManage = initScene(sceneConfigs)
+    const sceneManage = initScene(sceneConfigs, target)
     const currentSceneNodes = currentScene.nodeIndex
 
     currentSceneNodes.length > 0 && addNodes(currentSceneNodes, schema.nodes, sceneManage)

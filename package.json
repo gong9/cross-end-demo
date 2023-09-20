@@ -9,13 +9,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@anov/3d": "0.0.4-alpha.1"
+    "@anov/3d": "0.0.4-alpha.1",
+    "@monaco-editor/react": "^4.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",
     "@parcel/config-default": "^2.9.3",
+    "@parcel/transformer-vue": "2.9.3",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "buffer": "^5.5.0||^6.0.0",
     "eslint": "^8.23.0",
     "parcel": "^2.9.3",
-    "parcel-reporter-static-files-copy": "^1.5.2"
+    "parcel-reporter-static-files-copy": "^1.5.2",
+    "process": "^0.11.10"
   }
 }
