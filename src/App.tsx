@@ -13,7 +13,7 @@ const App = () => {
     if (target.children.length > 0)
       target.removeChild(target.children[0])
 
-    parse(jsonSchema, target)
+    parse(schema, target)
   }, [schema])
 
   const handleChange = (value: string | undefined) => {
