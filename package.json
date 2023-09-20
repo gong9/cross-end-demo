@@ -1,5 +1,5 @@
 {
-  "name": "example-demo",
+  "name": "cross-end-demo",
   "version": "1.0.0",
   "scripts": {
     "start": "parcel index.html",
