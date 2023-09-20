@@ -40,7 +40,7 @@ const jsonSchema = {
       name: '汽车',
       id: '5',
       type: 'model',
-      source: 'https://xxx.com/xxx.gltf',
+      source: './car.glb',
       attributes: {
         postion: [10, 0, 0],
         rotation: [0, 0, 0],

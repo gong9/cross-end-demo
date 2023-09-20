@@ -1,1 +1,1 @@
-import './src/example-01'
+import './src/index'
