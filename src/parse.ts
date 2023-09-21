@@ -118,7 +118,11 @@ const parse = (schema: SchemaType, target: HTMLDivElement) => {
     const currentSceneNodes = currentScene.nodeIndex
 
     currentSceneNodes.length > 0 && addNodes(currentSceneNodes, schema.nodes, sceneManage)
+
+    return sceneManage.scene
   }
+
+  return null
 }
 
 export default parse
