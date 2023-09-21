@@ -1,9 +1,12 @@
-import { AmbientLight, Color, ModelLoader, SceneControl, Vector3, use } from '@anov/3d'
+import type { Group } from '@anov/3d'
+import { AmbientLight, Color, MeshStandardMaterial, ModelLoader, SRGBColorSpace, SceneControl, TextureLoader, Vector3, use } from '@anov/3d'
 import type SchemaType from './type'
 import type { NodeType, PrivatePropType } from './type'
 
 // const { useScene } = use
 const modelLoader = new ModelLoader()
+const loader = new TextureLoader()
+let globalSchema: SchemaType | null = null
 
 const vec3 = (data: number[]) => {
   const [x, y, z] = data
@@ -61,6 +64,33 @@ const putLight = (curNode: NodeType, scene: SceneControl) => {
   }
 }
 
+interface MaterialType {
+  materialId: string
+  materialAttributes?: {
+    texture?: string
+  }
+}
+
+// 示例，简单完成
+const handleModelMaterial = (material: MaterialType, modelScene: Group) => {
+  if (material.materialAttributes?.texture) {
+    const textureId = material.materialAttributes.texture
+    const textureSource = globalSchema?.textures.find(texture => texture.id === textureId)?.source
+    const texture = loader.load(textureSource!)
+
+    texture.colorSpace = SRGBColorSpace
+
+    const currentMaterial = new MeshStandardMaterial({
+      map: texture,
+    })
+
+    modelScene.traverse((child) => {
+      if (child.type === 'Mesh')
+        (child as any).material = currentMaterial
+    })
+  }
+}
+
 const putModel = (curNode: NodeType, scene: SceneControl) => {
   const { source } = curNode
   const src = source!
@@ -74,6 +104,9 @@ const putModel = (curNode: NodeType, scene: SceneControl) => {
 
       modelScene.position.copy(vec3((attributes?.postion || [0, 0, 0])))
       modelScene.scale.copy(vec3((attributes?.scale || [1, 1, 1])))
+
+      if (curNode.private?.exterior?.material)
+        handleModelMaterial(curNode.private.exterior.material, modelScene as Group)
 
       scene.add(modelScene)
     })
@@ -111,6 +144,7 @@ const addNodes = (currentSceneNodes: string[], nodes: NodeType[], scene: SceneCo
 
 const parse = (schema: SchemaType, target: HTMLDivElement) => {
   const currentScene = schema.scenes[schema.scene]
+  globalSchema = schema
 
   if (currentScene) {
     const sceneConfigs = currentScene.private || {}

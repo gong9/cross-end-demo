@@ -73,7 +73,7 @@ const App = () => {
           }
        />
       <div ref={canvasRef} style={{ height: '100vh', width: '50vw' }}/>
-      <div className='absolute top-1 left-[500] '>
+      <div className='absolute top-1 left-[34%] '>
         <button onClick={run} className="w-[100] h-[40] text-sm/3 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 mr-3">运行</button>
         <button onClick={exportGltf} className="w-[100] h-[40] text-sm/3 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">导出GLTF</button>
       </div>

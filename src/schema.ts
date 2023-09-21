@@ -52,7 +52,7 @@ const jsonSchema = {
           material: {
             materialId: '1', // 材质ID
             materialAttributes: {
-              texture: 0, // 纹理ID
+              texture: '1', // 纹理ID
             },
           },
         },
@@ -63,14 +63,14 @@ const jsonSchema = {
     {
       name: 'demo 纹理',
       id: '1',
-      source: 'https://xxx.com/xxx.png',
+      source: './crate.gif',
     },
   ],
   materials: [
     {
       name: '基础材质',
       id: '1',
-      type: 'MeshBasicMaterial',
+      type: 'MeshStandardMaterial',
     },
   ],
   animations: [],
