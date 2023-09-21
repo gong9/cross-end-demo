@@ -14,12 +14,16 @@ const App = () => {
   const schemaString = useMemo(() => JSON.stringify(schema, null, 2), [schema])
   let scene: Scene | null = null
 
-  useEffect(() => {
+  const handleParse = () => {
     const target = canvasRef.current!
     if (target.children.length > 0)
       target.removeChild(target.children[0])
 
     scene = parse(schema, target)
+  }
+
+  useEffect(() => {
+    handleParse()
   }, [])
 
   const handleChange = (value: string | undefined) => {
@@ -35,11 +39,7 @@ const App = () => {
   }
 
   const run = () => {
-    const target = canvasRef.current!
-    if (target.children.length > 0)
-      target.removeChild(target.children[0])
-
-    scene = parse(schema, target)
+    handleParse()
   }
 
   const exportGltf = () => {
