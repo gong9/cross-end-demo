@@ -20,7 +20,7 @@ jobs:
       - name: build
         run: pnpm build
       - name: scp
-        uses: appleboy/scp-action@v0.0.1
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: 182.92.210.127
           port: 22
