@@ -23,6 +23,7 @@ jobs:
         uses: appleboy/scp-action@v0.0.1
         with:
           host: ${{secrets.ALIYUN_IP}}
+          port: 22
           username: ${{secrets.ALIYUN_NAME}}
           password: ${{secrets.AIYUN_PASSWORD}}
           source: 'dist/'
