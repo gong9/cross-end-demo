@@ -27,5 +27,5 @@ jobs:
           username: ${{secrets.ALIYUN_NAME}}
           password: ${{secrets.AIYUN_PASSWORD}}
           source: 'dist/'
-          target: '/root/nginx/corss-end'
+          target: '/root/nginx/cross-end'
           
